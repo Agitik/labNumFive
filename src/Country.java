@@ -1,7 +1,5 @@
 public enum Country {
+    USA,
     GERMANY,
-    FRANCE,
-    SPAIN,
-    VATICAN,
-    ITALY;
+    SOUTH_KOREA;
 }
