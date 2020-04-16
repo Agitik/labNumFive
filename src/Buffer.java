@@ -1,18 +1,19 @@
-public class Buffer {
-    static public Long id;
-    static public String name;
-    static public int CordX;                     //coordinates
-    static public float CordY;                   //coordinates
-    //creationDate
-    static public float price;
-    static Boolean refundable;
-    static TicketType type;
-    static public Double weight;                 //person
-    static public Color eyeColor;                //person
-    static public Color hairColor;               //person
-    static public Country nationality;           //person
-    static public Long LocX;                     //location
-    static public float LocY;                    //location
-    static public String LocName;                //location
+import java.time.LocalDate;
 
+public class Buffer {
+    static String id;                      //ticket
+    static String name;                    //ticket
+    static String CordX;                   //coordinates
+    static String CordY;                   //coordinates
+    static String creationDate;            //ticket
+    static String price;                   //ticket
+    static String refundable;              //ticket
+    static String type;                    //ticket
+    static String weight;                  //person
+    static String eyeColor;                //person
+    static String hairColor;               //person
+    static String nationality;             //person
+    static String LocX;                    //location
+    static String LocY;                    //location
+    static String LocName;                 //location
 }

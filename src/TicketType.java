@@ -9,4 +9,23 @@ public enum TicketType {
     USUAL,
     BUDGETARY,
     CHEAP;
+
+    public static TicketType setTicketType(String t){
+        TicketType rt = null;
+        switch (t){
+            case "VIP":
+                rt = VIP;
+                break;
+            case "USUAL":
+                rt = USUAL;
+                break;
+            case "BUDGETARY":
+                rt = BUDGETARY;
+                break;
+            case "CHEAP":
+                rt = CHEAP;
+                break;
+        }
+        return rt;
+    }
 }

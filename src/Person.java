@@ -9,4 +9,25 @@ public class Person {
     private Color hairColor; //Поле может быть null
     private Country nationality; //Поле может быть null
     private Location location; //Поле может быть null
+
+    public Person(String w, String e, String h, String n, Location l){
+        try {
+            this.weight = Double.parseDouble(w);
+            if (weight < 0){
+                throw new UnrealValueException("Введено отрицательное значение веса!");
+            }
+        } catch (NumberFormatException | UnrealValueException er){
+            System.out.println("Некорректное число! (Person -> weight).");
+            this.weight = null;
+        }
+
+        this.eyeColor = Color.setColor(e);
+        if(eyeColor == null){this.eyeColor = Color.setColor("BLUE");}
+
+        this.hairColor = Color.setColor(h);
+
+        this.nationality = Country.setCountry(n);
+
+        this.location = l;
+    }
 }
