@@ -1,0 +1,52 @@
+<?xml version = "1.0"?>
+<tickets>
+    <makingDay>2020 4 26</makingDay>
+    <ticket>
+    <id>10</id>
+    <name>BrBad</name>
+    <cordX>478</cordX>
+    <cordY>876</cordY>
+    <creationDate>2020 4 27</creationDate>
+    <price>0.0</price>
+    <refundable>null</refundable>
+    <type>VIP</type>
+    <personNull>null</personNull>
+    <locationNull>null</locationNull>
+    </ticket>
+    <ticket>
+    <id>20</id>
+    <name>Cinema</name>
+    <cordX>670</cordX>
+    <cordY>589</cordY>
+    <creationDate>2020 4 27</creationDate>
+    <price>1000.0</price>
+    <refundable>true</refundable>
+    <type>USUAL</type>
+    <Person>
+    <weight>80.0</weight>
+    <eyeColor>GREEN</eyeColor>
+    <hairColor>RED</hairColor>
+    <nationality>GERMANY</nationality>
+    <locX>45</locX>
+    <locY>54.0</locY>
+    <locName>Basic</locName>
+    </Person>
+    </ticket>
+    <ticket>
+    <id>30</id>
+    <name>American Dream</name>
+    <cordX>45</cordX>
+    <cordY>54</cordY>
+    <creationDate>2020 4 27</creationDate>
+    <price>1500.0</price>
+    <refundable>false</refundable>
+    <type>CHEAP</type>
+    <Person>
+    <weight>90.0</weight>
+    <eyeColor>BLUE</eyeColor>
+    <hairColor>YELLOW</hairColor>
+    <nationality>SOUTH_KOREA</nationality>
+    <locationNull>null</locationNull>
+    </Person>
+    </ticket>
+</tickets>

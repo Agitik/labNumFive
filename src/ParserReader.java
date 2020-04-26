@@ -1,19 +1,38 @@
+/**
+ * Класс для парсинка XML -> Java
+ * @author Дмитрий Толочек P3130
+ * @version 1.0 Before Check
+ */
+
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
 
-public class Parser {
+public class ParserReader {
+
+    public static String fName = "";
+
+    /**
+     * Метод, реализующий сам парсинг.
+     * @param f - Ссылка на файл
+     * @throws IOException - ошибка при чтении
+     * @throws XMLStreamException - ошибка с XML
+     */
     public static void Read(String f) throws IOException, XMLStreamException {
         try {
             boolean id, name, cordX, cordY, creationDate, price, refundable, type, weight, eyeColor, hairColor, nationality,
-                    locX, locY, locName;
+                    locX, locY, locName, initDate;
             id = name = cordX = cordY = creationDate = price = refundable = type = weight = eyeColor = hairColor = nationality = locX = locY = locName = false;
-
+            initDate = false;
+            Boolean personNull, locationNull, endTicket, makeingDay;
+            personNull = locationNull = makeingDay = endTicket = false;
+            Boolean isObjectReal = false;
 
             FileInputStream file = new FileInputStream(f);
             InputStreamReader fileReader = new InputStreamReader(file);
@@ -28,6 +47,9 @@ public class Parser {
                         String qName = startElement.getName().getLocalPart();
                         if (qName.equalsIgnoreCase("id")) {
                             id = true;
+                            isObjectReal = true;
+                        } else if(qName.equalsIgnoreCase("makingDay")){
+                            makeingDay = true;
                         } else if (qName.equalsIgnoreCase("name")) {
                             name = true;
                         } else if (qName.equalsIgnoreCase("cordX")) {
@@ -42,6 +64,8 @@ public class Parser {
                             refundable = true;
                         } else if (qName.equalsIgnoreCase("type")) {
                             type = true;
+                        } else if (qName.equalsIgnoreCase("personNull")){
+                            personNull = true;
                         } else if (qName.equalsIgnoreCase("weight")) {
                             weight = true;
                         } else if (qName.equalsIgnoreCase("eyeColor")) {
@@ -56,6 +80,10 @@ public class Parser {
                             locY = true;
                         } else if (qName.equalsIgnoreCase("locName")) {
                             locName = true;
+                        } else if (qName.equalsIgnoreCase("initDate")){
+                            initDate = true;
+                        } else if (qName.equalsIgnoreCase("locationNull")){
+                            locationNull = true;
                         }
                         break;
                     case XMLStreamConstants.CHARACTERS:
@@ -87,6 +115,11 @@ public class Parser {
                         } else if (weight) {
                             Buffer.weight = characters.getData();
                             weight = false;
+                        } else if (personNull) {
+                            if(characters.getData().equals("null")) {
+                                Buffer.person = "null";
+                            }
+                            personNull = false;
                         } else if (eyeColor) {
                             Buffer.eyeColor = characters.getData();
                             eyeColor = false;
@@ -96,6 +129,11 @@ public class Parser {
                         } else if (nationality) {
                             Buffer.nationality = characters.getData();
                             nationality = false;
+                        } else if(locationNull){
+                            if(characters.getData().equals("null")) {
+                                Buffer.location = "null";
+                                locationNull = false;
+                            }
                         } else if (locX) {
                             Buffer.LocX = characters.getData();
                             locX = false;
@@ -105,9 +143,25 @@ public class Parser {
                         } else if (locName) {
                             Buffer.LocName = characters.getData();
                             locName = false;
-                            CollectionManager.addObjectFromBufferAfterParse();
+                        } else if (initDate){
+                            Buffer.initDate = characters.getData();
+                            initDate = false;
+                        } else if (makeingDay){
+                            Buffer.makingDay = characters.getData();
+                            makeingDay = false;
                         }
                         break;
+                case XMLStreamConstants.END_ELEMENT:
+                    EndElement endElement = event.asEndElement();
+                    String eName = endElement.getName().getLocalPart();
+                    if(eName.equalsIgnoreCase("ticket")){
+                        if(isObjectReal){
+                            CollectionManager.addObjectFromBufferAfterParse();
+                            Buffer.BufferClear();
+                        } else {
+                            System.out.println("В файле отсутствуют элементы коллекции!");
+                        }
+                    }
                 }
             }
         } catch (IOException e){
