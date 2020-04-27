@@ -9,3 +9,4 @@ import java.util.HashMap;
 public class TicketCollection {
     static HashMap<Integer, Ticket> tickets = new HashMap<>();
 }
+

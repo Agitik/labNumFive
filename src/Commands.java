@@ -8,7 +8,6 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Commands {
 
@@ -201,18 +200,18 @@ public class Commands {
      * @param key - ключ объекта
      */
     static void remove_if_greater_key_null(Integer key){
-        Set<Integer> set = Collections.newSetFromMap(new ConcurrentHashMap<>());
-        for(Integer k : set) {
-            if (k > key){
+        TreeSet<Integer> ckeys = new TreeSet<Integer>(TicketCollection.tickets.keySet());
+        for(Integer k : ckeys) {
+                if (k > key){
                 TicketCollection.tickets.remove(k);
             }
-            System.out.println("\nКоманда выполнена!");
         }
+        System.out.println("\nКоманда выполнена!");
     }
 
     static void remove_if_lover_key_null(Integer key) {
-        Set<Integer> set = Collections.newSetFromMap(new ConcurrentHashMap<>());
-        for (Integer k : set) {
+        TreeSet<Integer> ckeys = new TreeSet<Integer>(TicketCollection.tickets.keySet());
+        for (Integer k : ckeys) {
             if (k < key) {
                 TicketCollection.tickets.remove(k);
             }
@@ -292,6 +291,7 @@ public class Commands {
      */
     static void catchAndExecuteCommand(String str){
         String pcom = str.trim();
+        pcom = pcom.replace("in>","");
         if(pcom.toLowerCase().equals("help")){
             Commands.help();
         } else if(pcom.toLowerCase().equals("info")){
